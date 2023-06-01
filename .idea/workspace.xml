@@ -9,8 +9,6 @@
       <change beforePath="$PROJECT_DIR$/src/Backend/CONST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/CONST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/DisplayText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/DisplayText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/Frontend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Frontend.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Backend/MyMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/MyMath.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/PDFSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/PDFSearcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685630763666</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="modifs du travail">
+      <created>1685632747420</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1685632747420</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

@@ -1,18 +1,24 @@
 package Backend;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DisplayText {
-    public static void displayIfWordClose(ArrayList<String> arrayWord, ArrayList<Integer> arrayindex){
-        System.out.println("Nous sommes dans estProche.");
+    public static void displayWordAndPosition(ArrayList<String> arrayWord, ArrayList<Integer> arrayIndex){
+        System.out.println("Nous sommes dans displayWordAndPosition.");
         for (int i = 0; i < arrayWord.size(); i++){
-            System.out.println("mot N. " + (i + 1) + " " + arrayWord.get(i) + " trouvé à au mot numéro : " + arrayindex.get(i));
+            System.out.println("mot N. " + (i + 1) + " " + arrayWord.get(i) + " trouvé à au mot numéro : " + arrayIndex.get(i));
         }
 
         System.out.println("\\n\n");
     }
 
-    public static void displaySentenceFromText(String text, ArrayList<Integer> wordIndex) {
+    public static void displayWithScore(){
+        return;
+    }
+
+    public static void displaySentenceFromText(String text, ArrayList<Integer> wordIndex, int[] FirstLast) {
         // Divise le texte en mots en utilisant les espaces ou les points comme séparateurs
         String[] mots = text.split("\\s+|\\.");
 
@@ -22,7 +28,6 @@ public class DisplayText {
             System.out.println("Index de mot invalide.");
             return;
         }
-        int[] FirstLast = MyMath.calculFirstLastIndex(wordIndex);
 
         boolean found;
         for (int i = FirstLast[0]; i <= FirstLast[1]; i++) {
@@ -37,5 +42,12 @@ public class DisplayText {
             }
         }
         System.out.println("\n\\n\n");
+    }
+
+    public static void displayIfWordClose(Boolean closer){
+        if (closer)
+            System.out.println("Les mots sont proches.");
+        else
+            System.out.println("Les mots sont loin.");
     }
 }

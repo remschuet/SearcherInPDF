@@ -3,6 +3,7 @@ package Backend;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -11,32 +12,29 @@ import org.apache.pdfbox.text.PDFTextStripper;
 public class PDFSearcher {
     private final ArrayList<String> listWord;
     private final ArrayList<Integer> indexWord;
+    private final HashMap<Integer, Integer> indexWithScore;
 
     public PDFSearcher(ArrayList<String> listWord){
         this.listWord = listWord;
         this.indexWord = new ArrayList<>();
+        indexWithScore = new HashMap<>();
     }
 
-    public void AfficherNbrFoisTrouve(String filePath) {
+    public String getStringFromPDF(String filePath){
+        String contentOfPdf = null;
         try {
             File file = new File(filePath);
             PDDocument document = Loader.loadPDF(file);
 
             PDFTextStripper textStripper = new PDFTextStripper();
-            String content = textStripper.getText(document);
-
-            if (ifWordAreCloser(content))
-                System.out.println("Les mots sont proches");
-            else
-                System.out.println("Les mots sont loins");
-
+            contentOfPdf = textStripper.getText(document);
             document.close();
         }
         catch (IOException e) {
             e.printStackTrace();
         }
+        return contentOfPdf;
     }
-
 
     public boolean ifWordAreCloser(String texte) {
         // Divise le texte en mots en utilisant les espaces ou les points comme séparateurs
@@ -56,8 +54,7 @@ public class PDFSearcher {
                 int distance = calculDistBtwFirstAndLast();
 
                 if (distance <= CONST.WORD_DIST) {
-                    DisplayText.displayIfWordClose(listWord, indexWord);
-                    DisplayText.displaySentenceFromText(texte, indexWord);
+                    addToIndexScore();
                     return true;
                 }
                 else
@@ -97,6 +94,23 @@ public class PDFSearcher {
         if (indexWord.get(0) < indexWord.size() - 1)
             distance = Math.abs(indexWord.get(indexWord.size() - 1) - indexWord.get(0));
         return distance;
+    }
+
+    private void addToIndexScore(){
+        int smallerIdx = indexWord.get(0);
+        for(Integer index : indexWord)
+            if (index < smallerIdx)
+                smallerIdx = index;
+
+        indexWithScore.put(smallerIdx, CONST.DFT_SCORE);
+    }
+
+    public HashMap<Integer, Integer> getIndexWithScore() {
+        return indexWithScore;
+    }
+
+    public ArrayList<Integer> getIndexWord() {
+        return indexWord;
     }
 }
 
