@@ -12,27 +12,30 @@ public class DisplayText {
         System.out.println("\\n\n");
     }
 
-    public static void displaySentenceFromText(String text, int wordIndex) {
+    public static void displaySentenceFromText(String text, ArrayList<Integer> wordIndex) {
         // Divise le texte en mots en utilisant les espaces ou les points comme séparateurs
         String[] mots = text.split("\\s+|\\.");
 
         System.out.println("\nNous sommes dans displaySentenceFromText : ");
-        if (wordIndex < 0 || wordIndex >= mots.length) {
+        // Verify with the first element
+        if (wordIndex.get(0) < 0 || wordIndex.get(0) >= mots.length) {
             System.out.println("Index de mot invalide.");
             return;
         }
+        int[] FirstLast = MyMath.calculFirstLastIndex(wordIndex);
 
-        int startIndex = Math.max(0, wordIndex - 5);
-        int endIndex = Math.min(mots.length - 1, wordIndex + 5);
-
-        for (int i = startIndex; i <= endIndex; i++) {
-            if (i == wordIndex) {
-                System.out.print("[" + mots[i] + "] ");
-            } else {
+        boolean found;
+        for (int i = FirstLast[0]; i <= FirstLast[1]; i++) {
+            found = false;
+            for (Integer index : wordIndex)
+                if (i == index) {
+                    System.out.print("[" + mots[i] + "] ");
+                    found = true;
+            }
+            if (! found) {
                 System.out.print(mots[i] + " ");
             }
         }
         System.out.println("\n\\n\n");
     }
-
 }

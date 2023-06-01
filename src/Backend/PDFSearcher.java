@@ -12,7 +12,7 @@ public class PDFSearcher {
     private final ArrayList<String> listWord;
     private final ArrayList<Integer> indexWord;
 
-    public PDFSearcher(ArrayList listWord){
+    public PDFSearcher(ArrayList<String> listWord){
         this.listWord = listWord;
         this.indexWord = new ArrayList<>();
     }
@@ -57,7 +57,7 @@ public class PDFSearcher {
 
                 if (distance <= CONST.WORD_DIST) {
                     DisplayText.displayIfWordClose(listWord, indexWord);
-                    DisplayText.displaySentenceFromText(texte, indexWord.get(0));
+                    DisplayText.displaySentenceFromText(texte, indexWord);
                     return true;
                 }
                 else

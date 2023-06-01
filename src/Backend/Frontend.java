@@ -18,12 +18,16 @@ public class Frontend {
 
     public void testWithPdf(){
         String filePath = "test.pdf";
-        String searchWord1 = "commence";
-        String searchWord2 = "fonction";
+        String searchWord1 = "fonction";
+        String searchWord2 = "renvoyer";
+        String searchWord3 = "retour";
+
+        //commence fonction 51, 50
 
         ArrayList<String> listWord = new ArrayList<>();
         listWord.add(searchWord1);
         listWord.add(searchWord2);
+        listWord.add(searchWord3);
 
         PDFSearcher pdfSearcher = new PDFSearcher(listWord);
         pdfSearcher.AfficherNbrFoisTrouve(filePath);
