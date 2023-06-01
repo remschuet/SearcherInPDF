@@ -5,10 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb3c1187-ad9d-4bd4-9b47-8e80659aeade" name="Changes" comment="modifs du travail">
+      <change afterPath="$PROJECT_DIR$/src/Backend/Data.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Backend/PdfMethodes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/CONST.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/CONST.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/DisplayText.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/DisplayText.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/Frontend.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/Frontend.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Backend/MyMath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/MyMath.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Backend/PDFSearcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Backend/PDFSearcher.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +107,14 @@
       <option name="project" value="LOCAL" />
       <updated>1685632747420</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="modifs du travail">
+      <created>1685642031596</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1685642031596</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

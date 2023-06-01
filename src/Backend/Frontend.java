@@ -1,7 +1,6 @@
 package Backend;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Frontend {
     public void testWithString() {
@@ -14,8 +13,8 @@ public class Frontend {
         listWord.add(mot1);
         listWord.add(mot2);
 
-        PDFSearcher pdfSearcher = new PDFSearcher(listWord);
-        pdfSearcher.ifWordAreCloser(texte);
+        //PDFSearcher pdfSearcher = new PDFSearcher();
+        //pdfSearcher.ifWordAreCloser(texte);
     }
 
     public void testWithPdf(){
@@ -32,18 +31,24 @@ public class Frontend {
         listWord.add(searchWord3);
 
         // Create PDFSearcher
-        PDFSearcher pdfSearcher = new PDFSearcher(listWord);
+        PDFSearcher pdfSearcher = new PDFSearcher(listWord, filePath);
 
         // Get content in String from pdf
-        String contentPDF = pdfSearcher.getStringFromPDF(filePath);
+        String contentPDF = PdfMethodes.getStringFromPDF(filePath);
         // Get if word a close
         boolean isClose = pdfSearcher.ifWordAreCloser(contentPDF);
-        // Get index and score
-        HashMap<Integer, Integer> hashMapScore = pdfSearcher.getIndexWithScore();
 
         // Display
         DisplayText.displayIfWordClose(isClose);
         DisplayText.displayWordAndPosition(listWord, pdfSearcher.getIndexWord());
-        DisplayText.displaySentenceFromText(contentPDF, pdfSearcher.getIndexWord(), MyMath.calculFirstLastIndex(pdfSearcher.getIndexWord()));
+
+       ArrayList<Data> listData = pdfSearcher.getDataList();
+       DisplayText.displayListData(listData);
+
+       DisplayText.displaySentenceFromData(listData.get(0));
+
+
+        MyMath.calculIdxStartEndSentence(listData.get(0));
+
     }
 }

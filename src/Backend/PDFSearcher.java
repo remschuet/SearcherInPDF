@@ -1,44 +1,23 @@
 package Backend;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.apache.pdfbox.Loader;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.text.PDFTextStripper;
 
 public class PDFSearcher {
     private final ArrayList<String> listWord;
     private final ArrayList<Integer> indexWord;
-    private final HashMap<Integer, Integer> indexWithScore;
+    private final ArrayList<Data> dataList;
+    private final String filePath;
 
-    public PDFSearcher(ArrayList<String> listWord){
+    public PDFSearcher(ArrayList<String> listWord, String filePath){
         this.listWord = listWord;
         this.indexWord = new ArrayList<>();
-        indexWithScore = new HashMap<>();
-    }
-
-    public String getStringFromPDF(String filePath){
-        String contentOfPdf = null;
-        try {
-            File file = new File(filePath);
-            PDDocument document = Loader.loadPDF(file);
-
-            PDFTextStripper textStripper = new PDFTextStripper();
-            contentOfPdf = textStripper.getText(document);
-            document.close();
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
-        return contentOfPdf;
+        this.dataList = new ArrayList<>();
+        this.filePath = filePath;
     }
 
     public boolean ifWordAreCloser(String texte) {
         // Divise le texte en mots en utilisant les espaces ou les points comme séparateurs
-        String[] mots = texte.split("\\s+|\\.");
+        String[] mots = texte.split(CONST.REGEX_SPACE_POINT);
 
         resetIndexWordList();
 
@@ -54,7 +33,7 @@ public class PDFSearcher {
                 int distance = calculDistBtwFirstAndLast();
 
                 if (distance <= CONST.WORD_DIST) {
-                    addToIndexScore();
+                    addData();
                     return true;
                 }
                 else
@@ -96,21 +75,16 @@ public class PDFSearcher {
         return distance;
     }
 
-    private void addToIndexScore(){
-        int smallerIdx = indexWord.get(0);
-        for(Integer index : indexWord)
-            if (index < smallerIdx)
-                smallerIdx = index;
-
-        indexWithScore.put(smallerIdx, CONST.DFT_SCORE);
-    }
-
-    public HashMap<Integer, Integer> getIndexWithScore() {
-        return indexWithScore;
+    private void addData(){
+       dataList.add(new Data(CONST.DFT_SCORE, MyMath.calculFirstLastIndex(indexWord), filePath, listWord, indexWord));
     }
 
     public ArrayList<Integer> getIndexWord() {
         return indexWord;
+    }
+
+    public ArrayList<Data> getDataList() {
+        return dataList;
     }
 }
 
