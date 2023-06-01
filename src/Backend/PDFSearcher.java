@@ -10,9 +10,11 @@ import org.apache.pdfbox.text.PDFTextStripper;
 
 public class PDFSearcher {
     private final ArrayList<String> listWord;
+    private final ArrayList<Integer> indexWord;
 
     public PDFSearcher(ArrayList listWord){
         this.listWord = listWord;
+        this.indexWord = new ArrayList<>();
     }
 
     public void AfficherNbrFoisTrouve(String filePath) {
@@ -23,7 +25,7 @@ public class PDFSearcher {
             PDFTextStripper textStripper = new PDFTextStripper();
             String content = textStripper.getText(document);
 
-            if (estProche(content))
+            if (ifWordAreCloser(content))
                 System.out.println("Les mots sont proches");
             else
                 System.out.println("Les mots sont loins");
@@ -36,55 +38,65 @@ public class PDFSearcher {
     }
 
 
-    public boolean estProche(String texte) {
+    public boolean ifWordAreCloser(String texte) {
         // Divise le texte en mots en utilisant les espaces ou les points comme séparateurs
         String[] mots = texte.split("\\s+|\\.");
 
-        ArrayList<Integer> indexWord = new ArrayList<>();
-        for (int i = 0; i < listWord.size(); i++) {
-            indexWord.add(i, -1);
-        }
+        resetIndexWordList();
 
-        int indexMot1 = -1;
-        int indexMot2 = -1;
-
-        for (int posCurWord = 0; posCurWord < mots.length; posCurWord++) {
-            // Supprime les points du mot courant
+        for (int idxCurrentWord = 0; idxCurrentWord < mots.length; idxCurrentWord++) {
+            // Supprime les points des mots courant                         
             // FIX ME, ajouter les lettres majuscules
-            String motCourant = mots[posCurWord].replaceAll("\\.", "");
+            String motCourant = mots[idxCurrentWord].replaceAll("\\.", "");
 
-            // Ajouter l'index si le mot est bon
-            for(String word : listWord)
-                // S'ils sont égaux
-                if (motCourant.equals(word))
-                    // Mettre dans indexWord a la bonne pos l'index
-                    indexWord.set(listWord.indexOf(word), posCurWord);
+            // verify if words are equals
+            setIdxIfWordEqual(motCourant, idxCurrentWord);
 
+            if (areAllWordFound()) {
+                int distance = calculDistBtwFirstAndLast();
 
-            boolean wordFound = true;
-            for (int i = 0; i < listWord.size(); i++)
-                if (indexWord.get(i) == -1) {
-                    wordFound = false;
-                    break;
-                }
-
-            if (wordFound) {
-                int distanceList = Math.abs(indexWord.get(0) - indexWord.get(indexWord.size() - 1));
-                if (indexWord.get(0) < indexWord.size() - 1)
-                    distanceList = Math.abs(indexWord.get(indexWord.size() - 1) - indexWord.get(0));
-
-                if (distanceList <= CONST.WORD_DIST) {
-                    DisplayText.displayIfWordCloseArray(listWord, indexWord);
+                if (distance <= CONST.WORD_DIST) {
+                    DisplayText.displayIfWordClose(listWord, indexWord);
                     DisplayText.displaySentenceFromText(texte, indexWord.get(0));
                     return true;
                 }
                 else
                     // Réinitialise les index pour rechercher d'autres occurrences
-                    for(int index : indexWord)
-                        index = -1;
+                    resetIndexWordList();
             }
         }
         return false;
+    }
+
+    private void resetIndexWordList(){
+        // Reset to -1 indexWord
+        for (int i = 0; i < listWord.size(); i++)
+            indexWord.add(i, -1);
+    }
+    
+    private void setIdxIfWordEqual(String motCourant, int idxCurrentWord){
+        // Set index if word are equals
+        for(String word : listWord)
+            // S'ils sont égaux
+            if (motCourant.equals(word))
+                // Mettre dans indexWord a la bonne pos l'index
+                indexWord.set(listWord.indexOf(word), idxCurrentWord);
+    }
+    
+    private boolean areAllWordFound(){
+        // Verify if all word are not equal to -1 (not found)
+        for (int i = 0; i < listWord.size(); i++)
+            if (indexWord.get(i) == -1)
+                return false;
+        return true;
+    }
+    
+    private int calculDistBtwFirstAndLast(){
+        // calcul distance between the first and the last word
+        int distance = Math.abs(indexWord.get(0) - indexWord.get(indexWord.size() - 1));
+        if (indexWord.get(0) < indexWord.size() - 1)
+            distance = Math.abs(indexWord.get(indexWord.size() - 1) - indexWord.get(0));
+        return distance;
     }
 }
 

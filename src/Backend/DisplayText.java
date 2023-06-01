@@ -3,7 +3,7 @@ package Backend;
 import java.util.ArrayList;
 
 public class DisplayText {
-    public static void displayIfWordCloseArray(ArrayList<String> arrayWord, ArrayList<Integer> arrayindex){
+    public static void displayIfWordClose(ArrayList<String> arrayWord, ArrayList<Integer> arrayindex){
         System.out.println("Nous sommes dans estProche.");
         for (int i = 0; i < arrayWord.size(); i++){
             System.out.println("mot N. " + (i + 1) + " " + arrayWord.get(i) + " trouvé à au mot numéro : " + arrayindex.get(i));

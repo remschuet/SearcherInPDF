@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Frontend {
     public void testWithString(){
-        String texte = "Le chat est sur le tapis . Le chat dort sur le tapis .";
+        String texte = "Le chat est sur le tapis. Le chat dort sur le tapis.";
         String mot1 = "chat";
         String mot2 = "tapis";
 
@@ -13,7 +13,7 @@ public class Frontend {
         listWord.add(mot2);
 
         PDFSearcher pdfSearcher = new PDFSearcher(listWord);
-        pdfSearcher.estProche(texte);
+        pdfSearcher.ifWordAreCloser(texte);
     }
 
     public void testWithPdf(){
