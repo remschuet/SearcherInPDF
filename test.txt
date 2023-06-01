@@ -1,0 +1,23 @@
+Une fonction en Python est un bloc de code réutilisable qui effectue une tâche spécifique. Elle permet
+d'organiser et de structurer votre programme en regroupant des instructions qui peuvent être exécutées
+plusieurs fois à différents endroits.
+
+Voici les principaux éléments d'une fonction en Python :
+
+Définition : Une fonction commence par le mot-clé def, suivi du nom de la fonction. Le nom doit être
+significatif et décrire la tâche effectuée par la fonction. Par convention, les noms de fonction en Python
+sont en minuscules, avec des mots séparés par des underscores (snake_case).
+
+Paramètres : Les paramètres sont des valeurs que vous pouvez passer à une fonction pour qu'elle les
+utilise lors de son exécution. Ils sont placés entre parenthèses après le nom de la fonction. Vous pouvez
+définir autant de paramètres que nécessaire, séparés par des virgules. Les paramètres sont facultatifs,
+c'est-à-dire que vous pouvez avoir une fonction sans paramètres.
+
+Corps de la fonction : Le corps de la fonction est constitué d'un bloc d'instructions indentées qui seront
+exécutées lorsque la fonction est appelée. Les instructions spécifiques à la fonction doivent être
+indentées d'une manière cohérente (généralement avec quatre espaces).
+
+Instruction de retour : Une fonction peut renvoyer une valeur en utilisant l'instruction return. Cela
+permet de récupérer le résultat calculé par la fonction. Si une fonction n'a pas d'instruction return, elle
+renverra automatiquement la valeur None.
+
